@@ -1,5 +1,4 @@
-﻿
-namespace TicketingSystem.Areas.Admin.Constants
+﻿namespace TicketingSystem.Areas.Admin.Constants
 {
     public static class AdminConstants
     {

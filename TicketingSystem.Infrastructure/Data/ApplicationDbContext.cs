@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using TicketingSystem.Infrastructure.Data.Configuration;
 
 namespace TicketingSystem.Infrastructure.Data
 {
@@ -13,7 +14,7 @@ namespace TicketingSystem.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-
+            builder.ApplyConfiguration(new RoleConfiguration());
 
             base.OnModelCreating(builder);
         }

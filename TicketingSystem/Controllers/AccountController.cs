@@ -53,6 +53,8 @@ namespace TicketingSystem.Controllers
 
             var result = await userManager.CreateAsync(user, model.Password);
 
+            await userManager.AddToRoleAsync(user, "Client");
+
             if (result.Succeeded)
             {
 
