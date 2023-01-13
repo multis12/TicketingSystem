@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using TicketingSystem.Core.Models.Account;
 using TicketingSystem.Infrastructure.Data;
 
@@ -54,10 +55,16 @@ namespace TicketingSystem.Controllers
             var result = await userManager.CreateAsync(user, model.Password);
 
             await userManager.AddToRoleAsync(user, "Client");
+            //await userManager.AddToRoleAsync(user, "Administrator");
+            if (await userManager.IsInRoleAsync(user, "Administrator"))
+            {
+                await userManager.AddToRoleAsync(user, "Client");
+                await userManager.AddToRoleAsync(user, "Staff");
+            }
 
             if (result.Succeeded)
             {
-
+               
                 return RedirectToAction("Login", "Account", new { area = "" });
             }
 
@@ -98,6 +105,18 @@ namespace TicketingSystem.Controllers
                 var result = await signInManager.PasswordSignInAsync(user, model.Password, false, false);
                 if (result.Succeeded)
                 {
+                    if (await userManager.IsInRoleAsync(user, "Administrator"))
+                    {
+                        return RedirectToAction("Index", "Home", new { area = "Admin" });
+                    }
+                    else if (await userManager.IsInRoleAsync(user,"Staff"))
+                    {
+                        return RedirectToAction("Index", "Home", new { area = "Staff" });
+                    }
+                    else if (await userManager.IsInRoleAsync(user,"Client"))
+                    {
+                        return RedirectToAction("Index", "Home", new { area = "Client" });
+                    }
                     return RedirectToAction("Index", "Home", new { area = "" });
                 }
             }

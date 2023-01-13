@@ -10,6 +10,7 @@ namespace TicketingSystem.Extensions
         {
             services.AddScoped<IRepository, Repository>();
             services.AddScoped<IProjectService, ProjectService>();
+            services.AddScoped<ITicketService, TicketService>();
 
 
             return services;

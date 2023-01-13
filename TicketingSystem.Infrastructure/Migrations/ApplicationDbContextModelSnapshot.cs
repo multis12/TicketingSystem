@@ -51,22 +51,24 @@ namespace TicketingSystem.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f33f4bd5-1160-487a-9305-111f130c4dcd",
-                            ConcurrencyStamp = "ae8c9bf6-ffc2-4e65-9069-74112b6490eb",
-                            Name = "Administrator"
+                            Id = "7655619d-3adc-4f82-b30a-920f15973d3e",
+                            ConcurrencyStamp = "2c3fa69d-ed92-44d9-9085-fc9d77e8113d",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "a3244119-8e9b-45b3-bf41-5207fe58a2d2",
-                            ConcurrencyStamp = "0ec8818a-42e3-456d-ac0f-844876b4cd66",
+                            Id = "fe2e75ae-ffe7-4c15-a382-c661b8d0ee76",
+                            ConcurrencyStamp = "63275507-c287-40c9-8774-a285369d1988",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         },
                         new
                         {
-                            Id = "a56fc288-dcbe-4499-bfb8-72341937f6d5",
-                            ConcurrencyStamp = "0e36ae14-e95b-40ae-90ff-d0e1d6c9b7ba",
-                            Name = "Staff"
+                            Id = "23770ec7-4a07-4f6a-b37f-c25d3b183b68",
+                            ConcurrencyStamp = "6656a0cf-3c06-46fb-88ba-919c6d19f1dc",
+                            Name = "Staff",
+                            NormalizedName = "STAFF"
                         });
                 });
 
@@ -253,23 +255,6 @@ namespace TicketingSystem.Infrastructure.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("TicketingSystem.Infrastructure.Data.Condition", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Conditions");
-                });
-
             modelBuilder.Entity("TicketingSystem.Infrastructure.Data.Message", b =>
                 {
                     b.Property<int>("Id")
@@ -325,6 +310,13 @@ namespace TicketingSystem.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MessageConditions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Чернова"
+                        });
                 });
 
             modelBuilder.Entity("TicketingSystem.Infrastructure.Data.Project", b =>
@@ -338,6 +330,9 @@ namespace TicketingSystem.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -359,7 +354,7 @@ namespace TicketingSystem.Infrastructure.Migrations
                     b.Property<int>("ConditionId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DateAndTime")
+                    b.Property<DateTime?>("DateAndTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -367,7 +362,6 @@ namespace TicketingSystem.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FilePath")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("ProjectId")
@@ -381,7 +375,6 @@ namespace TicketingSystem.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -395,6 +388,45 @@ namespace TicketingSystem.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Tickets");
+                });
+
+            modelBuilder.Entity("TicketingSystem.Infrastructure.Data.TicketCondition", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Conditions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Чернова"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Нов"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Работи се"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Приключен"
+                        });
                 });
 
             modelBuilder.Entity("TicketingSystem.Infrastructure.Data.Type", b =>
@@ -412,6 +444,28 @@ namespace TicketingSystem.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Types");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Bug report"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Feature request"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Assistance request"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Other"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -490,7 +544,7 @@ namespace TicketingSystem.Infrastructure.Migrations
 
             modelBuilder.Entity("TicketingSystem.Infrastructure.Data.Ticket", b =>
                 {
-                    b.HasOne("TicketingSystem.Infrastructure.Data.Condition", "Condition")
+                    b.HasOne("TicketingSystem.Infrastructure.Data.TicketCondition", "Condition")
                         .WithMany()
                         .HasForeignKey("ConditionId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -508,9 +562,7 @@ namespace TicketingSystem.Infrastructure.Migrations
 
                     b.HasOne("TicketingSystem.Infrastructure.Data.AppUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Condition");
 

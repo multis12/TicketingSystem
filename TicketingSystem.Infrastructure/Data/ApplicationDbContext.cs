@@ -14,6 +14,9 @@ namespace TicketingSystem.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.ApplyConfiguration(new TypeConfiguration());
+            builder.ApplyConfiguration(new TicketConditionConfiguration());
+            builder.ApplyConfiguration(new MessageConditionConfiguration());
             builder.ApplyConfiguration(new RoleConfiguration());
 
             base.OnModelCreating(builder);
@@ -21,7 +24,7 @@ namespace TicketingSystem.Infrastructure.Data
 
         public DbSet<Ticket> Tickets { get; set; }
 
-        public DbSet<Condition> Conditions { get; set; }
+        public DbSet<TicketCondition> Conditions { get; set; }
 
         public DbSet<MessageCondition> MessageConditions { get; set; }
 

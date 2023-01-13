@@ -19,5 +19,7 @@ namespace TicketingSystem.Infrastructure.Data
         public string Description { get; set; }
 
         public List<Ticket> Tickets { get; set; } = new List<Ticket>();
+
+        public bool IsActive { get; set; } = true;
     }
 }

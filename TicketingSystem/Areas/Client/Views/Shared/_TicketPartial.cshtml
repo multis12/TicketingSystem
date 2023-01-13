@@ -1,0 +1,30 @@
+﻿@model TicketServiceModel
+
+<div class="col-md-4">
+    <div class="card mb-3">
+        <div class="card-body text-center">
+            <h4>Title:@Model.Title</h4>
+            <h4>Created On:@Model.DateAndTime</h4>
+            <h4>Description:@Model.Description</h4>
+            <h4>Type:@Model.Type</h4>
+            <h4>Condition:@Model.Condition</h4>
+            <h4>Condition:@Model.</h4>
+            @*@foreach (var ticket in Model.Tickets)
+            {
+            <partial name="_TicketPartial" model="@ticket" />
+            }*@
+            <br />
+            @if (this.User.Identity.IsAuthenticated)
+            {
+                if (this.User.IsInRole(AdminRoleName))
+                {
+                    <a asp-area="Staff" asp-controller="Ticket" asp-action="Delete" asp-route-id="@Model.Id"
+               class="btn btn-success">Delete</a>
+                }
+                <a asp-area="" asp-controller="Ticket" asp-action="Create" asp-route-id="@Model.Id"
+               class="btn btn-success">Edit</a>
+                <p></p>
+            }
+        </div>
+    </div>
+</div>
