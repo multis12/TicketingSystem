@@ -1,14 +1,14 @@
-﻿@model ProjectModel
+﻿@model ProjectViewModel
 
 <div class="col-md-4">
     <div class="card mb-3">
         <div class="card-body text-center">
             <h4>Title:@Model.Name</h4>
             <h4>Description:@Model.Description</h4>
-            @foreach (var ticket in Model.Tickets)
+            @*@foreach (var ticket in Model.Tickets)
             {
                 <partial name="_TicketPartial" model="@ticket" />
-            }
+            }*@
             <br />
             @if (this.User.Identity.IsAuthenticated)
             {
@@ -17,6 +17,8 @@
                     <a asp-area="Admin" asp-controller="Project" asp-action="Delete" asp-route-id="@Model.Id"
                class="btn btn-success">Delete</a>
                 }
+                <a asp-area="" asp-controller="Ticket" asp-action="Add" asp-route-id="@Model.Id"
+               class="btn btn-success">Edit</a>
                 <p></p>
             }
         </div>

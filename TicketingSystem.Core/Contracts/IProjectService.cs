@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TicketingSystem.Core.Models.Project;
+﻿using TicketingSystem.Core.Models.Project;
 
 namespace TicketingSystem.Core.Contracts
 {
@@ -11,6 +6,10 @@ namespace TicketingSystem.Core.Contracts
     {
         Task<IEnumerable<ProjectViewModel>> All();
 
-        Task<int> Create(ProjectModel model);
+        Task Create(ProjectModel model);
+
+        Task Delete(int projectId);
+
+        Task<ProjectModel> DetailsById(int Id);
     }
 }

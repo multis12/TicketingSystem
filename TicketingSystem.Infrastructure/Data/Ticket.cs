@@ -15,12 +15,11 @@ namespace TicketingSystem.Infrastructure.Data
         [Required]
         public string Description { get; set; }
 
-        public string FilePath { get; set; }
+        public string? FilePath { get; set; }
 
-        [Required]
-        public DateTime DateAndTime { get; set; }
+        public DateTime? DateAndTime { get; set; }
 
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
 
         [ForeignKey(nameof(UserId))]
         public AppUser? User { get; set; }
@@ -33,7 +32,7 @@ namespace TicketingSystem.Infrastructure.Data
         public int ConditionId { get; set; }
 
         [ForeignKey(nameof(ConditionId))]
-        public Condition Condition { get; set; }
+        public TicketCondition Condition { get; set; }
 
         public List<Message> Messages { get; set; } = new List<Message>();
     }
