@@ -54,12 +54,19 @@ namespace TicketingSystem.Core.Services
             return ticketTypes;
         }
 
-        public async Task Create(TicketModel model, IFormFile file)
+        public async Task Create(TicketModel model, IFormFile file, string userId, int projectId)
         {
             var filePath = Path.Combine(environment.ContentRootPath, @"wwwroot\files", file.FileName);
             using var fileStream = new FileStream(filePath, FileMode.Create);
             await file.CopyToAsync(fileStream);
-            var user = await repo.GetByIdAsync<AppUser>(model.UserId);
+
+            var project = await repo.All<Project>()
+                .Where(x => x.Id == projectId)
+                .Include(x => x.Tickets)
+                .FirstAsync();
+
+            var user = await repo.GetByIdAsync<AppUser>(userId);
+
             var ticket = new Ticket()
             {
                 Id = model.Id,
@@ -70,10 +77,12 @@ namespace TicketingSystem.Core.Services
                 Title = model.Title,
                 TypeId = model.TypeId,
                 FilePath = filePath,
-                UserId = model.UserId,
+                UserId = user.Id,
                 User = user
             };
 
+            project.Tickets.Add(ticket);
+            
             await repo.AddAsync(ticket);
             await repo.SaveChangesAsync();
         }

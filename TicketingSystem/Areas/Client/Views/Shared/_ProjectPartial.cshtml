@@ -12,14 +12,24 @@
             <br />
             @if (this.User.Identity.IsAuthenticated)
             {
-                if (this.User.IsInRole(AdminRoleName))
+                if (User.IsInRole(AdminRoleName))
                 {
                     <a asp-area="Admin" asp-controller="Project" asp-action="Delete" asp-route-id="@Model.Id"
                class="btn btn-danger">Delete</a>
                 }
-                if (this.User.IsInRole(AdminRoleName) || this.User.IsInRole(StaffRoleName) || this.User.IsInRole(ClientRoleName))
+                if (User.IsInRole(AdminRoleName) || User.IsInRole(StaffRoleName))
                 {
-                    <a asp-area="Client" asp-controller="Ticket" asp-action="Create" asp-route-id="@Model.Id"
+                    <a asp-area="Staff" asp-controller="Project" asp-action="Details" asp-route-id="@Model.Id"
+               class="btn btn-success">Details</a>
+                }
+                if (User.IsInRole(ClientRoleName) && !User.IsInRole(AdminRoleName) && !User.IsInRole(StaffRoleName))
+                {
+                    <a asp-area="Client" asp-controller="Project" asp-action="Details" asp-route-id="@Model.Id"
+               class="btn btn-success">Details</a>
+                }
+                if (User.IsInRole(AdminRoleName) || User.IsInRole(StaffRoleName) || User.IsInRole(ClientRoleName))
+                {
+                    <a asp-area="Client" asp-controller="Ticket" asp-action="Create" asp-route-projectId="@Model.Id"
                class="btn btn-success">Create Ticket</a>
                 }
                 <p></p>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using TicketingSystem.Core.Contracts;
 using TicketingSystem.Core.Models.Project;
 using static TicketingSystem.Areas.Admin.Constants.AdminConstants;
@@ -51,8 +52,9 @@ namespace TicketingSystem.Areas.Admin.Controllers
             {
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
+            var userId = User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
-            var project = await projectService.DetailsById(id);
+            var project = await projectService.DetailsById(id, userId);
 
             var model = new ProjectDeleteModel()
             {

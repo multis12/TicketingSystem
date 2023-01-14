@@ -12,26 +12,37 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Ticketing System</a>
+                @if (this.User.Identity != null && User.IsInRole(AdminRoleName))
+                {
+                    <a class="navbar-brand" asp-area="Admin" asp-controller="Home" asp-action="Index">Ticketing System</a>
+                }
+                @if (this.User.Identity != null && User.IsInRole(StaffRoleName) && User.IsInRole(ClientRoleName) && !User.IsInRole(AdminRoleName))
+                {
+                    <a class="navbar-brand" asp-area="Staff" asp-controller="Home" asp-action="Index">Ticketing System</a>
+                }
+                @if (this.User.Identity != null && User.IsInRole(ClientRoleName) && !User.IsInRole(StaffRoleName) && !User.IsInRole(AdminRoleName))
+                {
+                    <a class="navbar-brand" asp-area="Client" asp-controller="Home" asp-action="Index">Ticketing System</a>
+                }
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        @if (this.User.Identity != null && User.IsInRole("Administrator"))
+                        @if (this.User.Identity != null && User.IsInRole(AdminRoleName))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
                         }
-                        @if (this.User.Identity != null && User.IsInRole("Staff"))
+                        @if (this.User.Identity != null && User.IsInRole(StaffRoleName) && User.IsInRole(ClientRoleName) && !User.IsInRole(AdminRoleName))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="Staff" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
                         }
-                        @if (this.User.Identity != null && User.IsInRole("Client"))
+                        @if (this.User.Identity != null && User.IsInRole(ClientRoleName) && !User.IsInRole(StaffRoleName) && !User.IsInRole(AdminRoleName))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="Client" asp-controller="Home" asp-action="Index">Home</a>

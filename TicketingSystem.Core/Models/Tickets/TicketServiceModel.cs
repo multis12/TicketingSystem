@@ -18,9 +18,9 @@ namespace TicketingSystem.Core.Models.Tickets
 
         public string? Description { get; set; }
 
-        public IFormFile? FilePath { get; set; }
+        public string? FilePath { get; set; }
 
-        public DateTime DateAndTime { get; set; } = DateTime.Now;
+        public DateTime? DateAndTime { get; set; } = DateTime.Now;
 
         public string? FirstName { get; set; }
 

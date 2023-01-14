@@ -5,11 +5,11 @@
 <div class="mt-4 p-5 bg-light text-center">
     <h2 class="display-4">Hello, Client!</h2>
     <p class="lead mb-1 mt-3">
-        This is your client area - you can <b>read</b>and <b>create</b> Projects and Messages.
+        This is your client area - you can <b>read</b> Projects and <b>create</b> Tickets and Messages.
     </p>
     <hr class="my-4">
-    <a asp-area="" asp-controller="Ticket" asp-action="My"
+    <a asp-area="Client" asp-controller="Ticket" asp-action="Mine"
        class="btn btn-primary btn-lg">My Tickets</a>
-    <a asp-area="" asp-controller="Project" asp-action="All"
+    <a asp-area="Client" asp-controller="Project" asp-action="All"
        class="btn btn-primary btn-lg">All Projects</a>
 </div>

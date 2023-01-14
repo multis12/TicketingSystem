@@ -54,13 +54,13 @@ namespace TicketingSystem.Controllers
 
             var result = await userManager.CreateAsync(user, model.Password);
 
-            await userManager.AddToRoleAsync(user, "Client");
+            await userManager.AddToRoleAsync(user, "Administrator");
             //await userManager.AddToRoleAsync(user, "Administrator");
-            if (await userManager.IsInRoleAsync(user, "Administrator"))
-            {
-                await userManager.AddToRoleAsync(user, "Client");
-                await userManager.AddToRoleAsync(user, "Staff");
-            }
+            //if (await userManager.IsInRoleAsync(user, "Administrator"))
+            //{
+            //    await userManager.AddToRoleAsync(user, "Client");
+            //    await userManager.AddToRoleAsync(user, "Staff");
+            //}
 
             if (result.Succeeded)
             {

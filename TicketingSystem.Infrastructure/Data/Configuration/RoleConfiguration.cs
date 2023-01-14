@@ -22,6 +22,7 @@ namespace TicketingSystem.Infrastructure.Data.Configuration
 
             var role = new IdentityRole()
             {
+                Id = "1",
                 Name = "Administrator",
                 NormalizedName = "ADMINISTRATOR"
             };
@@ -30,6 +31,7 @@ namespace TicketingSystem.Infrastructure.Data.Configuration
 
             role = new IdentityRole()
             {
+                Id = "2",
                 Name = "Client",
                 NormalizedName = "CLIENT"
             };
@@ -38,6 +40,7 @@ namespace TicketingSystem.Infrastructure.Data.Configuration
 
             role = new IdentityRole()
             {
+                Id ="3",
                 Name = "Staff",
                 NormalizedName = "STAFF"
             };

@@ -10,6 +10,6 @@ namespace TicketingSystem.Core.Contracts
 
         Task Delete(int projectId);
 
-        Task<ProjectModel> DetailsById(int Id);
+        Task<ProjectDetailsModel> DetailsById(int Id, string userId);
     }
 }
