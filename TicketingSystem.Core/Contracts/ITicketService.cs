@@ -10,7 +10,7 @@ namespace TicketingSystem.Core.Contracts
 {
     public interface ITicketService
     {
-        Task Create(TicketModel model, IFormFile file);
+        Task Create(TicketModel model, IFormFile file, string userId, int projectId);
 
         Task<IEnumerable<TicketConditionModel>> AllTicketConditions();
 

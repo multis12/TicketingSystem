@@ -15,7 +15,7 @@ namespace TicketingSystem.Areas.Client.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(int projectId)
         {
             var userId = User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
@@ -30,19 +30,28 @@ namespace TicketingSystem.Areas.Client.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(TicketModel model)
+        public async Task<IActionResult> Create(TicketModel model, int projectId)
         {
+            var userId = User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
             if (!ModelState.IsValid)
             {
                 model.Conditions = await ticketService.AllTicketConditions();
                 model.Types = await ticketService.AllTicketTypes();
 
+                model.UserId = userId;
                 return View(model);
             }
 
-            await ticketService.Create(model, model.FilePath);
+            await ticketService.Create(model, model.FilePath, userId, projectId);
 
-            return RedirectToAction(nameof(ProjectController.All));
+            return RedirectToAction("All", "Project");
+        
         }
+
+        //[HttpGet]
+        //public async Task<IActionResult> Mine()
+        //{
+            
+        //}
     }
 }

@@ -1,0 +1,32 @@
+﻿@model ProjectDetailsModel
+
+@{
+    ViewBag.Title = "Project Details";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="container" style="display:inline">
+    <div class="row">
+        <div class="card col-8 border-0">
+            <p style="font-size:45px;"><u>@Model.Name</u></p>
+            <p>Description: @Model.Description</p>
+            <div class="form-inline">
+                @if (this.User.Identity.IsAuthenticated)
+                {
+                    if (User.IsInRole(AdminRoleName))
+                    {     
+                        <a class="ml-2 btn btn-danger" asp-area="Admin" asp-controller="Project" asp-action="Delete"
+                   asp-route-id="@Model.Id">Delete</a>
+                    }
+                }
+            </div>
+                @foreach (var ticket in Model.Tickets)
+                {
+                    <partial name="_TicketPartial" model="@ticket" />
+                }
+            <p></p>
+        </div>
+    </div>
+</div>
