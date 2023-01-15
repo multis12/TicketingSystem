@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TicketingSystem.Core.Contracts;
+using TicketingSystem.Core.Models.Messages;
 using TicketingSystem.Core.Models.Tickets;
 using TicketingSystem.Infrastructure.Data;
 using TicketingSystem.Infrastructure.Data.Common;
@@ -85,6 +81,66 @@ namespace TicketingSystem.Core.Services
             
             await repo.AddAsync(ticket);
             await repo.SaveChangesAsync();
+        }
+
+        public async Task Delete(int Id)
+        {
+            var ticket = await repo.GetByIdAsync<Ticket>(Id);
+            ticket.IsActive = false;
+
+            await repo.SaveChangesAsync();
+        }
+
+        public async Task<TicketDetailsModel> DetailsById(int Id)
+        {
+            return await repo.AllReadonly<Ticket>()
+                    .Where(x => x.IsActive == true)
+                    .Where(x => x.Id == Id)
+                    .Include(x => x.Messages)
+                    .Select(x => new TicketDetailsModel()
+                    {
+                        Id = x.Id,
+                        Title = x.Title,
+                        Description = x.Description,
+                        DateAndTime= x.DateAndTime,
+                        Condition = x.Condition.Name,
+                        Email = x.User.Email,
+                        FilePath = x.FilePath,
+                        FirstName = x.User.FirstName,
+                        SecondName = x.User.SecondName,
+                        Type = x.Type.Name,
+                        Messages = x.Messages.Select(a => new MessageServiceModel()
+                        {
+                            DateAndTime = a.DateAndTime,
+                            Condition = a.Condition.Name,
+                            Description = a.Description,
+                            Email = a.Author.Email,
+                            FilePath = a.FilePath,
+                            FirstName = a.Author.FirstName,
+                            Id = a.Id,
+                            SecondName = a.Author.SecondName
+                        }).ToList()
+                    }).FirstAsync();
+        }
+
+        public async Task Edit(TicketEditModel model, int ticketId)
+        {
+            var ticket = await repo.GetByIdAsync<Ticket>(ticketId);
+
+            ticket.ConditionId = ticket.ConditionId;
+            ticket.TypeId = ticket.TypeId;
+
+            await repo.SaveChangesAsync();
+        }
+
+        public async Task<int> GetTicketConditionId(int ticketId)
+        {
+            return (await repo.GetByIdAsync<Ticket>(ticketId)).ConditionId;
+        }
+
+        public async Task<int> GetTicketTypeId(int ticketId)
+        {
+            return (await repo.GetByIdAsync<Ticket>(ticketId)).TypeId;
         }
     }
 }

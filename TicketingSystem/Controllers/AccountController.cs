@@ -54,7 +54,7 @@ namespace TicketingSystem.Controllers
 
             var result = await userManager.CreateAsync(user, model.Password);
 
-            await userManager.AddToRoleAsync(user, "Administrator");
+            await userManager.AddToRoleAsync(user, "Client");
             //await userManager.AddToRoleAsync(user, "Administrator");
             //if (await userManager.IsInRoleAsync(user, "Administrator"))
             //{
@@ -105,7 +105,7 @@ namespace TicketingSystem.Controllers
                 var result = await signInManager.PasswordSignInAsync(user, model.Password, false, false);
                 if (result.Succeeded)
                 {
-                    if (await userManager.IsInRoleAsync(user, "Administrator"))
+                    if (await userManager.IsInRoleAsync(user, "Administrator") && await userManager.IsInRoleAsync(user, "Staff"))
                     {
                         return RedirectToAction("Index", "Home", new { area = "Admin" });
                     }

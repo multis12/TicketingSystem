@@ -48,10 +48,11 @@ namespace TicketingSystem.Areas.Client.Controllers
         
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> Mine()
-        //{
-            
-        //}
+        public async Task<IActionResult> Details(int id)
+        {
+            var model = await ticketService.DetailsById(id);
+
+            return View(model);
+        }
     }
 }

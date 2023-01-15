@@ -1,23 +1,21 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TicketingSystem.Infrastructure.Data;
 
-namespace TicketingSystem.Infrastructure.Data
+namespace TicketingSystem.Core.Models.Messages
 {
-    public class Message
+    public class MessageModel
     {
-        [Key]
         public int Id { get; set; }
 
-        [Required]
-        public DateTime DateAndTime { get; set; }
+        public DateTime? DateAndTime { get; set; } = DateTime.Now;
 
-        public string AuthorId  { get; set; }
+        public string AuthorId { get; set; }
 
         [ForeignKey(nameof(AuthorId))]
         public AppUser Author { get; set; }
@@ -28,6 +26,6 @@ namespace TicketingSystem.Infrastructure.Data
         [Required]
         public string Description { get; set; }
 
-        public string? FilePath { get; set; }
+        public string FilePath { get; set; }
     }
 }
