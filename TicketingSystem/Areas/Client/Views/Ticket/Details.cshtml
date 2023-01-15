@@ -22,14 +22,17 @@
             <div class="form-inline">
                 @if (this.User.Identity.IsAuthenticated)
                 {
-                    if (User.IsInRole(AdminRoleName))
+                    if (User.IsInRole(AdminRoleName) || User.IsInRole(StaffRoleName))
                     {
-                        <a class="ml-2 btn btn-danger" asp-area="Admin" asp-controller="Project" asp-action="Delete"
+                        <a class="ml-2 btn btn-danger" asp-area="Staff" asp-controller="Ticket" asp-action="Delete"
                    asp-route-id="@Model.Id">Delete</a>
                     }
                 }
-                <a class="ml-2 btn btn-success" asp-area="Client" asp-controller="Message" asp-action="Create"
+                @if (!(Model.Condition == "Приключен"))
+                {
+                    <a class="ml-2 btn btn-success" asp-area="Client" asp-controller="Message" asp-action="Create"
                    asp-route-id="@Model.Id">Send a Message</a>
+                }
             </div>
                 @foreach (var ticket in Model.Messages)
                 {

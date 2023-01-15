@@ -58,7 +58,7 @@ namespace TicketingSystem.Areas.Admin.Controllers
 
             var model = new ProjectDeleteModel()
             {
-                Name = project.Name
+                Name = project.Name        
             };
 
             return View(model);
@@ -74,7 +74,7 @@ namespace TicketingSystem.Areas.Admin.Controllers
             }
             await projectService.Delete(id);
 
-            return RedirectToAction(nameof(Client.Controllers.ProjectController.All), new { area = "Client" });
+            return RedirectToAction("All", "Project", new { area = "Client" });
         }
     }
 }

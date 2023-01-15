@@ -9,11 +9,11 @@ namespace TicketingSystem.Core.Models.Project
 
         [Required]
         [StringLength(150)]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [Required]
         [StringLength(2000)]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         public List<Ticket> Tickets { get; set; } = new List<Ticket>();
     }

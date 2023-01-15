@@ -34,7 +34,10 @@ namespace TicketingSystem.Core.Services
                 .Where(x => x.Id == ticketId)
                 .Include(x => x.Messages)
                 .FirstAsync();
-
+            if (ticket.TypeId == 4)
+            {
+                throw new ArgumentException("Invalid Ticket");
+            }
             var user = await repo.GetByIdAsync<AppUser>(userId);
 
             var message = new Message()

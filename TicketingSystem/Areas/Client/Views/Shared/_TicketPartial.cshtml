@@ -17,14 +17,14 @@
             <partial name="_TicketPartial" model="@ticket" />
             }*@
             <br />
-            @if (this.User.Identity.IsAuthenticated)
+            @if (User.Identity.IsAuthenticated)
             {
-                if (this.User.IsInRole(AdminRoleName))
+                if (User.IsInRole(AdminRoleName) || User.IsInRole(StaffRoleName))
                 {
                     <a asp-area="Staff" asp-controller="Ticket" asp-action="Delete" asp-route-id="@Model.Id"
                class="btn btn-danger">Delete</a>
                 }
-                if (this.User.IsInRole(AdminRoleName) || this.User.IsInRole(StaffRoleName))
+                if (User.IsInRole(AdminRoleName) || User.IsInRole(StaffRoleName))
                 {
                     <a asp-area="Staff" asp-controller="Ticket" asp-action="Edit" asp-route-id="@Model.Id"
                class="btn btn-success">Edit</a>
