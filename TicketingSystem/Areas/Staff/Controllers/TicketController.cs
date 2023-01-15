@@ -63,7 +63,7 @@ namespace TicketingSystem.Areas.Staff.Controllers
 
             await ticketService.Edit(model, model.Id);
 
-            return RedirectToAction(nameof(Client.Controllers.TicketController.Details), new { area = "Client"});
+            return RedirectToAction("All", "Project", new { area = "Client"});
         }
     }
 }

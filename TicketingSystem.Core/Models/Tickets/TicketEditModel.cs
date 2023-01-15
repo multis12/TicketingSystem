@@ -15,17 +15,15 @@ namespace TicketingSystem.Core.Models.Tickets
     {
         public int Id { get; set; }
 
-        [Required]
         [StringLength(100)]
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
-        [Required]
         [StringLength(2000)]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         public string? FilePath { get; set; }
 
-        public DateTime? DateAndTime { get; set; } = DateTime.Now;
+        public DateTime? DateAndTime { get; set; }
 
         public string? FirstName { get; set; }
 

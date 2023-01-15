@@ -93,7 +93,7 @@ namespace TicketingSystem.Core.Services
 
         public async Task<TicketDetailsModel> DetailsById(int Id)
         {
-            return await repo.AllReadonly<Ticket>()
+            return await repo.All<Ticket>()
                     .Where(x => x.IsActive == true)
                     .Where(x => x.Id == Id)
                     .Include(x => x.Messages)
@@ -119,7 +119,9 @@ namespace TicketingSystem.Core.Services
                             FirstName = a.Author.FirstName,
                             Id = a.Id,
                             SecondName = a.Author.SecondName
-                        }).ToList()
+                        })
+                        .OrderByDescending(x => x.DateAndTime)
+                        .ToList()
                     }).FirstAsync();
         }
 
@@ -127,8 +129,8 @@ namespace TicketingSystem.Core.Services
         {
             var ticket = await repo.GetByIdAsync<Ticket>(ticketId);
 
-            ticket.ConditionId = ticket.ConditionId;
-            ticket.TypeId = ticket.TypeId;
+            ticket.ConditionId = model.ConditionId;
+            ticket.TypeId = model.TypeId;
 
             await repo.SaveChangesAsync();
         }

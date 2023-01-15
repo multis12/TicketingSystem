@@ -17,13 +17,11 @@ namespace TicketingSystem.Areas.Client.Controllers
         [HttpGet]
         public async Task<IActionResult> Create(int projectId)
         {
-            var userId = User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
             var model = new TicketModel()
             {
                 Conditions = await ticketService.AllTicketConditions(),
                 Types = await ticketService.AllTicketTypes(),
-                UserId = userId
             };
             
             return View(model);

@@ -14,15 +14,16 @@ namespace TicketingSystem.Infrastructure.Data
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        public DateTime DateAndTime { get; set; }
+        public DateTime? DateAndTime { get; set; }
 
         public string AuthorId  { get; set; }
 
         [ForeignKey(nameof(AuthorId))]
         public AppUser Author { get; set; }
 
-        [Required]
+        public int ConditionId { get; set; }
+
+        [ForeignKey(nameof(ConditionId))]
         public MessageCondition Condition { get; set; }
 
         [Required]

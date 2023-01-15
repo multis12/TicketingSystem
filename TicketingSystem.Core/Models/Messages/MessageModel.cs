@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TicketingSystem.Infrastructure.Data;
+using TicketingSystem.Core.Models.Tickets;
+using Microsoft.AspNetCore.Http;
 
 namespace TicketingSystem.Core.Models.Messages
 {
@@ -17,15 +19,15 @@ namespace TicketingSystem.Core.Models.Messages
 
         public string AuthorId { get; set; }
 
-        [ForeignKey(nameof(AuthorId))]
-        public AppUser Author { get; set; }
+        [Display(Name = "Condition")]
+        public int ConditionId { get; set; }
+
+        public IEnumerable<MessageConditionModel> Conditions { get; set; } = new List<MessageConditionModel>();
 
         [Required]
-        public MessageCondition Condition { get; set; }
-
-        [Required]
+        [StringLength(2000)]
         public string Description { get; set; }
 
-        public string FilePath { get; set; }
+        public IFormFile? FilePath { get; set; }
     }
 }

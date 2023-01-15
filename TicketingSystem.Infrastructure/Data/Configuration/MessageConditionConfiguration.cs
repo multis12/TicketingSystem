@@ -24,6 +24,7 @@ namespace TicketingSystem.Infrastructure.Data.Configuration
                 Id = 1,
                 Name = "Чернова"
             };
+
             messageConditions.Add(messageCondition);
 
             messageCondition = new MessageCondition()
