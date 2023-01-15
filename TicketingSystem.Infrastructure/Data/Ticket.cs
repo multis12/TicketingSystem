@@ -35,5 +35,7 @@ namespace TicketingSystem.Infrastructure.Data
         public TicketCondition Condition { get; set; }
 
         public List<Message> Messages { get; set; } = new List<Message>();
+
+        public bool IsActive { get; set; } = true;
     }
 }

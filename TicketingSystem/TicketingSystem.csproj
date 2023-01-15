@@ -31,8 +31,8 @@
     <Folder Include="Areas\Client\Models\" />
     <Folder Include="Areas\Staff\Data\" />
     <Folder Include="Areas\Staff\Models\" />
-    <Folder Include="Areas\Staff\Views\Tickets\" />
     <Folder Include="wwwroot\files\" />
+    <Folder Include="wwwroot\messageFiles\" />
   </ItemGroup>
 
 </Project>

@@ -1,26 +1,35 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
+using TicketingSystem.Core.Models.Messages;
 using TicketingSystem.Infrastructure.Data;
 
 namespace TicketingSystem.Core.Models.Tickets
 {
-    public class TicketModel
+    public class TicketEditModel
     {
         public int Id { get; set; }
 
-        [Required]
         [StringLength(100)]
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
-        [Required]
         [StringLength(2000)]
-        public string Description { get; set; }
-            
-        public IFormFile? FilePath { get; set; }
+        public string? Description { get; set; }
 
-        public DateTime? DateAndTime { get; set; } = DateTime.Now;
+        public string? FilePath { get; set; }
 
-        public string? UserId { get; set; }
+        public DateTime? DateAndTime { get; set; }
+
+        public string? FirstName { get; set; }
+
+        public string? SecondName { get; set; }
+
+        public string? Email { get; set; }
 
         [Display(Name = "Type")]
         public int TypeId { get; set; }
@@ -32,6 +41,6 @@ namespace TicketingSystem.Core.Models.Tickets
 
         public IEnumerable<TicketConditionModel> Conditions { get; set; } = new List<TicketConditionModel>();
 
-        public List<Message> Messages { get; set; } = new List<Message>();
+        public List<MessageServiceModel> Messages { get; set; } = new List<MessageServiceModel>();
     }
 }

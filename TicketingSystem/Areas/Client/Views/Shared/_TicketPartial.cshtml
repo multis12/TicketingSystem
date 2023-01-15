@@ -9,6 +9,9 @@
             <h4>Type: @Model.Type</h4>
             <h4>Condition: @Model.Condition</h4>
             <h4>File: @Model.FilePath</h4>
+            <h4>First Name: @Model.FirstName</h4>
+            <h4>Second Name: @Model.SecondName</h4>
+            <h4>Email: @Model.Email</h4>
             @*@foreach (var ticket in Model.Tickets)
             {
             <partial name="_TicketPartial" model="@ticket" />
@@ -19,9 +22,16 @@
                 if (this.User.IsInRole(AdminRoleName))
                 {
                     <a asp-area="Staff" asp-controller="Ticket" asp-action="Delete" asp-route-id="@Model.Id"
-               class="btn btn-success">Delete</a>
+               class="btn btn-danger">Delete</a>
+                }
+                if (this.User.IsInRole(AdminRoleName) || this.User.IsInRole(StaffRoleName))
+                {
+                    <a asp-area="Staff" asp-controller="Ticket" asp-action="Edit" asp-route-id="@Model.Id"
+               class="btn btn-success">Edit</a>
                 }
             }
+            <a asp-area="Client" asp-controller="Ticket" asp-action="Details" asp-route-id="@Model.Id"
+               class="btn btn-success">Messages</a>
         </div>
     </div>
 </div>

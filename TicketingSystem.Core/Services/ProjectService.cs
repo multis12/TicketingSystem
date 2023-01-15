@@ -109,6 +109,7 @@ namespace TicketingSystem.Core.Services
             var clientTickets = new List<TicketServiceModel>();
 
             clientTickets = await repo.AllReadonly<Ticket>()
+                .Where(c => c.IsActive == true)
                 .Where(c => c.UserId == userId)
                 .Select(c => new TicketServiceModel()
                 {
@@ -151,7 +152,7 @@ namespace TicketingSystem.Core.Services
                         Id = x.Id,
                         Name = x.Name,
                         Description = x.Description,
-                        Tickets = x.Tickets.Select(a => new TicketServiceModel()
+                        Tickets = x.Tickets.Where(a => a.IsActive == true).Select(a => new TicketServiceModel()
                         {
                             DateAndTime = a.DateAndTime,
                             Condition = a.Condition.Name,

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TicketingSystem.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using TicketingSystem.Infrastructure.Data;
 namespace TicketingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230114153058_IsActiveTickets")]
+    partial class IsActiveTickets
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,21 +54,21 @@ namespace TicketingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "e4f16569-55d4-4286-aee3-ae1d3129cd02",
+                            ConcurrencyStamp = "4cea5175-aecb-4909-9c70-603871367818",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "05999562-7ed0-4a2d-a3f9-0b5ab0787fd0",
+                            ConcurrencyStamp = "e797cc23-87ad-435e-8d81-1400886614a2",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "d660325d-3caf-4680-b1e7-16b75bc03375",
+                            ConcurrencyStamp = "3283d41b-faae-4bb7-acdb-0a1f0f3ae496",
                             Name = "Staff",
                             NormalizedName = "STAFF"
                         });
@@ -270,7 +272,7 @@ namespace TicketingSystem.Infrastructure.Migrations
                     b.Property<int>("ConditionId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("DateAndTime")
+                    b.Property<DateTime>("DateAndTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -278,6 +280,7 @@ namespace TicketingSystem.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FilePath")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("TicketId")
