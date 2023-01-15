@@ -52,7 +52,7 @@ namespace TicketingSystem.Areas.Staff.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Edit(TicketEditModel model)
-        {
+             {
             if (!ModelState.IsValid)
             {
                 model.Conditions = await ticketService.AllTicketConditions();
