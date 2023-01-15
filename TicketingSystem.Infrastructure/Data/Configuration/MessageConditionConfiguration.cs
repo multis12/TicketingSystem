@@ -33,6 +33,8 @@ namespace TicketingSystem.Infrastructure.Data.Configuration
                 Name = "Публикувано"
             };
 
+            messageConditions.Add(messageCondition);
+
             return messageConditions;
         }
     }

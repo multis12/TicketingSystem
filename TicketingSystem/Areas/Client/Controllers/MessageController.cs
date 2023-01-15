@@ -38,7 +38,7 @@ namespace TicketingSystem.Areas.Client.Controllers
 
             await messageService.Create(model, model.FilePath, userId, id);
 
-            return RedirectToAction(nameof(TicketController.Details));
+            return RedirectToAction("All", "Project");
 
         }
     }

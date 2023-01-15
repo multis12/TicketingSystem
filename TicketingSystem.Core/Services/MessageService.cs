@@ -44,8 +44,7 @@ namespace TicketingSystem.Core.Services
                 DateAndTime = model.DateAndTime,
                 ConditionId = model.ConditionId,
                 Description = model.Description,
-                FilePath = filePath,
-                Id = model.Id
+                FilePath = filePath
             };
 
             ticket.Messages.Add(message);
