@@ -12,6 +12,7 @@ namespace TicketingSystem.Extensions
             services.AddScoped<IProjectService, ProjectService>();
             services.AddScoped<ITicketService, TicketService>();
             services.AddScoped<IMessageService, MessageService>();
+            services.AddScoped<IAccountService, AccountService>();
 
 
             return services;

@@ -50,17 +50,14 @@ namespace TicketingSystem.Controllers
                 SecondName = model.SecondName,
                 Email = model.Email,
                 UserName = model.UserName
+                
             };
+
+            user.AccountRoleId = 2;
 
             var result = await userManager.CreateAsync(user, model.Password);
 
             await userManager.AddToRoleAsync(user, "Client");
-            //await userManager.AddToRoleAsync(user, "Administrator");
-            //if (await userManager.IsInRoleAsync(user, "Administrator"))
-            //{
-            //    await userManager.AddToRoleAsync(user, "Client");
-            //    await userManager.AddToRoleAsync(user, "Staff");
-            //}
 
             if (result.Succeeded)
             {
@@ -100,6 +97,10 @@ namespace TicketingSystem.Controllers
 
             var user = await userManager.FindByNameAsync(model.UserName);
 
+            if (user.IsActive == false)
+            {
+                throw new ArgumentException("Account is not approved or it's Banned");
+            }
             if (user != null)
             {
                 var result = await signInManager.PasswordSignInAsync(user, model.Password, false, false);

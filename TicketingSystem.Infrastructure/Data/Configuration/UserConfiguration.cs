@@ -24,13 +24,15 @@ namespace TicketingSystem.Infrastructure.Data.Configuration
 
             var user = new AppUser()
             {
-                Id = "1a3c1aad-89c2-444f-88ef-ce265a341270",
+                Id = "e7fc219d-b7ae-447e-ad73-1a6b4dc9c5e2",
                 UserName = "Client",
                 NormalizedUserName = "CLIENT",
                 Email = "client@mail.com",
                 NormalizedEmail = "CLIENT@MAIL.COM",
                 FirstName = "Client",
-                SecondName = "Client"
+                SecondName = "Client",
+                IsActive = true,
+                AccountRoleId = 2
             };
 
             user.PasswordHash = hasher.HashPassword(user, "Client123");
@@ -39,13 +41,15 @@ namespace TicketingSystem.Infrastructure.Data.Configuration
 
             user = new AppUser()
             {
-                Id = "08cfa46f-f2e4-4ae3-b3b7-6a99ee51843a",
+                Id = "a02a086f-e7a3-4dba-9732-d92a137c1158",
                 UserName = "Staff",
                 NormalizedUserName = "STAFF",
                 Email = "staff@mail.com",
                 NormalizedEmail = "STAFF@MAIL.COM",
                 FirstName = "Staff",
-                SecondName = "Staff"
+                SecondName = "Staff",
+                IsActive = true,
+                AccountRoleId = 3
             };
 
             user.PasswordHash = hasher.HashPassword(user, "Staff123");
@@ -54,13 +58,15 @@ namespace TicketingSystem.Infrastructure.Data.Configuration
 
             user = new AppUser()
             {
-                Id = "622d93dd-682c-4370-999b-6c4315ccceea",
+                Id = "fe738829-bae4-46ec-a545-ed40aee912ea",
                 UserName = "Admin",
                 NormalizedUserName = "ADMIN",
                 Email = "admin@mail.com",
                 NormalizedEmail = "ADMIN@MAIL.COM",
                 FirstName = "Admin",
-                SecondName = "Admin"
+                SecondName = "Admin",
+                IsActive = true,
+                AccountRoleId = 1
             };
 
             user.PasswordHash = hasher.HashPassword(user, "Admin123");

@@ -17,6 +17,7 @@ namespace TicketingSystem.Infrastructure.Data
             builder.ApplyConfiguration(new TypeConfiguration());
             builder.ApplyConfiguration(new TicketConditionConfiguration());
             builder.ApplyConfiguration(new MessageConditionConfiguration());
+            builder.ApplyConfiguration(new AccountRequestRoleConfiguration());
             builder.ApplyConfiguration(new RoleConfiguration());
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new UserRoleConfiguration());
@@ -33,5 +34,7 @@ namespace TicketingSystem.Infrastructure.Data
         public DbSet<Type> Types { get; set; }
 
         public DbSet<Project> Projects { get; set; }
+
+        public DbSet<AccountRequestRole> AccountRequestRoles { get; set; }
     }
 }

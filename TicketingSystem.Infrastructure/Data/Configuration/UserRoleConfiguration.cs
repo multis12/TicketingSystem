@@ -23,36 +23,36 @@ namespace TicketingSystem.Infrastructure.Data.Configuration
                 new IdentityUserRole<string>()
                 {
                     RoleId = "1",
-                    UserId = "622d93dd-682c-4370-999b-6c4315ccceea"
+                    UserId = "fe738829-bae4-46ec-a545-ed40aee912ea"
                 },
 
                 new IdentityUserRole<string>()
                 {
                     RoleId = "2",
-                    UserId = "622d93dd-682c-4370-999b-6c4315ccceea"
+                    UserId = "fe738829-bae4-46ec-a545-ed40aee912ea"
                 },
 
                 new IdentityUserRole<string>()
                 {
                     RoleId = "3",
-                    UserId = "622d93dd-682c-4370-999b-6c4315ccceea"
+                    UserId = "fe738829-bae4-46ec-a545-ed40aee912ea"
                 },
 
                 new IdentityUserRole<string>()
                 {
-                    UserId = "08cfa46f-f2e4-4ae3-b3b7-6a99ee51843a",
+                    UserId = "a02a086f-e7a3-4dba-9732-d92a137c1158",
                     RoleId = "3"
                 },
 
                 new IdentityUserRole<string>()
                 {
-                    UserId = "08cfa46f-f2e4-4ae3-b3b7-6a99ee51843a",
+                    UserId = "a02a086f-e7a3-4dba-9732-d92a137c1158",
                     RoleId = "2"
                 },
 
                 new IdentityUserRole<string>()
                 {
-                    UserId = "1a3c1aad-89c2-444f-88ef-ce265a341270",
+                    UserId = "e7fc219d-b7ae-447e-ad73-1a6b4dc9c5e2",
                     RoleId = "2"
                 }
             };
