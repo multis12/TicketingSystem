@@ -1,0 +1,15 @@
+﻿@model List<TicketServiceModel>
+
+@{
+    ViewBag.Title = "My tickets";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="row">
+    @foreach (var ticket in Model)
+    {
+            <partial name="_TicketPartial" model="@ticket" />
+    }
+</div>

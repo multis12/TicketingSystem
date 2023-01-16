@@ -20,7 +20,7 @@ namespace TicketingSystem.Core.Models.Tickets
 
         public string? FilePath { get; set; }
 
-        public DateTime? DateAndTime { get; set; } = DateTime.Now;
+        public DateTime? DateAndTime { get; set; }
 
         public string? FirstName { get; set; }
 

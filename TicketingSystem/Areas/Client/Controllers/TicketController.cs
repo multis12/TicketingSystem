@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using TicketingSystem.Core.Contracts;
+using TicketingSystem.Core.Models.Project;
 using TicketingSystem.Core.Models.Tickets;
+using TicketingSystem.Core.Services;
 
 namespace TicketingSystem.Areas.Client.Controllers
 {
@@ -51,6 +53,22 @@ namespace TicketingSystem.Areas.Client.Controllers
             var model = await ticketService.DetailsById(id);
 
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Mine()
+        {
+            var userId = User.FindFirst(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
+
+            var model = await ticketService.Mine(userId);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Mine(IEnumerable<TicketModel> model)
+        {
+            return RedirectToAction("Mine", "Ticket", new { area = "Client" });
         }
     }
 }

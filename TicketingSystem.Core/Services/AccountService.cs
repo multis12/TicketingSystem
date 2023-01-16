@@ -162,9 +162,9 @@ namespace TicketingSystem.Core.Services
             {
                 await userManager.RemovePasswordAsync(user);
                 await userManager.AddPasswordAsync(user, model.Password);
+                user.PasswordHash = hasher.HashPassword(user, model.Password);
             }
             user.Email = model.Email;
-            user.PasswordHash = hasher.HashPassword(user, model.Password);
             user.NormalizedEmail = model.Email.ToUpper();
             user.SecondName = model.SecondName;
             user.UserName = model.UserName;
