@@ -1,15 +1,15 @@
-﻿@model List<AccountRequestModel>
+﻿@model List<AccountModel>
 
 @{
-    ViewBag.Title = "Account Requests";
+    ViewBag.Title = "All projects";
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 
 <div class="row">
-    @foreach (var account in Model)
+    @foreach (var project in Model)
     {
-        <partial name="_AccountPartial" model="@account" />
+        <partial name="_AccountPartial" model="@project" />
     }
 </div>

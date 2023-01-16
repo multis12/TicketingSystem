@@ -52,10 +52,14 @@ namespace TicketingSystem.Core.Services
 
         public async Task Create(TicketModel model, IFormFile file, string userId, int projectId)
         {
-            var filePath = Path.Combine(environment.ContentRootPath, @"wwwroot\files", file.FileName);
-            using var fileStream = new FileStream(filePath, FileMode.Create);
-            await file.CopyToAsync(fileStream);
-
+            string? filePath = String.Empty;
+            if (file != null)
+            {
+                filePath = Path.Combine(environment.ContentRootPath, @"wwwroot\files", file.FileName);
+                using var fileStream = new FileStream(filePath, FileMode.Create);
+                await file.CopyToAsync(fileStream);
+            }
+            
             var project = await repo.All<Project>()
                 .Where(x => x.Id == projectId)
                 .Include(x => x.Tickets)

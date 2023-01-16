@@ -8,10 +8,8 @@ using System.Xml.Linq;
 
 namespace TicketingSystem.Core.Models.Account
 {
-    public class AccountRequestModel
+    public class AccountDeleteModel
     {
-        public string? Id { get; set; }
-
         [Display(Name = "First Name")]
         public string? FirstName { get; set; }
 
@@ -23,10 +21,5 @@ namespace TicketingSystem.Core.Models.Account
 
         [Display(Name = "Email")]
         public string? Email { get; set; }
-
-        [Display(Name = "Account Request Role")]
-        public int AccountRequestRoleId { get; set; }
-
-        public IEnumerable<AccountRequestRoleModel> AccountRequestRoles { get; set; } = new List<AccountRequestRoleModel>();
     }
 }
