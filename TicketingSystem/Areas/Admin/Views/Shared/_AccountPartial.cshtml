@@ -1,0 +1,21 @@
+﻿@model AccountRequestModel
+
+<div class="col-md-4">
+    <div class="card mb-3">
+        <div class="card-body text-center">
+            <h4>First Name:@Model.FirstName</h4>
+            <h4>Second Name:@Model.SecondName</h4>
+            <h4>User Name:@Model.UserName</h4>
+            <h4>Email:@Model.Email</h4>
+            <br />
+            @if (this.User.Identity.IsAuthenticated)
+            {
+                if (this.User.IsInRole(AdminRoleName))
+                {
+                    <a asp-area="Admin" asp-controller="Account" asp-action="Approve" asp-route-id="@Model.Id"
+               class="btn btn-success">Approve</a>
+                }
+            }
+        </div>
+    </div>
+</div>

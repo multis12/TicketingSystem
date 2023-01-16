@@ -1,0 +1,26 @@
+﻿@model AccountRequestModel
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form enctype="multipart/form-data" method="post">
+            <input type="hidden" asp-for="@Model.Id" />>
+            <h4>First Name: @Model.FirstName</h4>
+            <h4>Second Name: @Model.SecondName</h4>
+            <h4>User Name: @Model.UserName</h4>
+            <h4>Email: @Model.Email</h4>
+            <div class="form-group">
+                <label asp-for="AccountRequestRoleId"></label>
+                <select asp-for="AccountRequestRoleId" class="form-control">
+                    @foreach (var AccReqRole in Model.AccountRequestRoles)
+                    {
+                        <option value="@AccReqRole.Id">@AccReqRole.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="AccountRequestRoleId" class="small text-danger"></span>
+            </div>
+            <div class="text-center">
+                <input class="btn btn-primary mt-3" type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+</div>

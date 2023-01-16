@@ -1,0 +1,14 @@
+﻿@model AccountRequestModel
+
+@{
+    ViewBag.Title = "Approve Account";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<partial name="_AccountApprovePartial" model="@Model" />
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

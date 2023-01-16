@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TicketingSystem.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using TicketingSystem.Infrastructure.Data;
 namespace TicketingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230116105939_AccountRequestRoles4")]
+    partial class AccountRequestRoles4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,21 +54,21 @@ namespace TicketingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "fafbe72a-32d1-46ae-94f6-a6ce04009aed",
+                            ConcurrencyStamp = "d54a878b-978a-4942-af66-61b0c0e842dc",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "a2dc8fa3-00b8-40c9-bf20-d4c62c855f23",
+                            ConcurrencyStamp = "8c155500-b4a4-40d3-839f-5f9c2ab7ae2e",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "10ec9528-7b0f-4ba3-9935-4ff2ddbcf1d0",
+                            ConcurrencyStamp = "58f1ef5f-e611-405a-9ffc-e7b0d1cb6cd2",
                             Name = "Staff",
                             NormalizedName = "STAFF"
                         });
@@ -163,32 +165,32 @@ namespace TicketingSystem.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "fe738829-bae4-46ec-a545-ed40aee912ea",
+                            UserId = "622d93dd-682c-4370-999b-6c4315ccceea",
                             RoleId = "1"
                         },
                         new
                         {
-                            UserId = "fe738829-bae4-46ec-a545-ed40aee912ea",
+                            UserId = "622d93dd-682c-4370-999b-6c4315ccceea",
                             RoleId = "2"
                         },
                         new
                         {
-                            UserId = "fe738829-bae4-46ec-a545-ed40aee912ea",
+                            UserId = "622d93dd-682c-4370-999b-6c4315ccceea",
                             RoleId = "3"
                         },
                         new
                         {
-                            UserId = "a02a086f-e7a3-4dba-9732-d92a137c1158",
+                            UserId = "08cfa46f-f2e4-4ae3-b3b7-6a99ee51843a",
                             RoleId = "3"
                         },
                         new
                         {
-                            UserId = "a02a086f-e7a3-4dba-9732-d92a137c1158",
+                            UserId = "08cfa46f-f2e4-4ae3-b3b7-6a99ee51843a",
                             RoleId = "2"
                         },
                         new
                         {
-                            UserId = "e7fc219d-b7ae-447e-ad73-1a6b4dc9c5e2",
+                            UserId = "1a3c1aad-89c2-444f-88ef-ce265a341270",
                             RoleId = "2"
                         });
                 });
@@ -331,10 +333,10 @@ namespace TicketingSystem.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e7fc219d-b7ae-447e-ad73-1a6b4dc9c5e2",
+                            Id = "1a3c1aad-89c2-444f-88ef-ce265a341270",
                             AccessFailedCount = 0,
                             AccountRoleId = 2,
-                            ConcurrencyStamp = "2db22ad7-5e1b-4730-914b-2484abdf6013",
+                            ConcurrencyStamp = "4a3b7dfc-50fd-4311-b848-02be85e48d63",
                             Email = "client@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Client",
@@ -342,19 +344,19 @@ namespace TicketingSystem.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "CLIENT@MAIL.COM",
                             NormalizedUserName = "CLIENT",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKF+y4XTWK9kuBZdoomEJLHX0aPvE5UsRW7FcUFPdPUu2A/UrOayM43zmT3zpAtBHA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOwmytTg2HEQs2c5c2/ef8B2MP7iFVgmRNlBRavRLzF6LjE26E/yMqhsfs1yFEmL+Q==",
                             PhoneNumberConfirmed = false,
                             SecondName = "Client",
-                            SecurityStamp = "61890207-4f5e-4b21-974f-524d4d7ace0d",
+                            SecurityStamp = "e12f08aa-4963-42a9-a832-121ddc9081b6",
                             TwoFactorEnabled = false,
                             UserName = "Client"
                         },
                         new
                         {
-                            Id = "a02a086f-e7a3-4dba-9732-d92a137c1158",
+                            Id = "08cfa46f-f2e4-4ae3-b3b7-6a99ee51843a",
                             AccessFailedCount = 0,
                             AccountRoleId = 3,
-                            ConcurrencyStamp = "440e411d-c631-43ae-9ef1-8dce562fbc85",
+                            ConcurrencyStamp = "a9e22bda-1831-489e-898d-1f063c1e387d",
                             Email = "staff@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Staff",
@@ -362,19 +364,19 @@ namespace TicketingSystem.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "STAFF@MAIL.COM",
                             NormalizedUserName = "STAFF",
-                            PasswordHash = "AQAAAAEAACcQAAAAEETu2b6NY3eoDhsSaq0AthmBl+OntAfHNjFJRBdazzBfLn650Tscxx391g+zqHyUFA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEM98e0njPzcBlpfpIVNkLHTPxhNkPj668hFGpiFyY01SBURLu0CLe+q3otp6oOWG6g==",
                             PhoneNumberConfirmed = false,
                             SecondName = "Staff",
-                            SecurityStamp = "adf0f1ee-3e3c-452b-8f74-d8841ddc3ec1",
+                            SecurityStamp = "cefa2f48-c9a6-4597-bc0c-3e9d4ae0957f",
                             TwoFactorEnabled = false,
                             UserName = "Staff"
                         },
                         new
                         {
-                            Id = "fe738829-bae4-46ec-a545-ed40aee912ea",
+                            Id = "622d93dd-682c-4370-999b-6c4315ccceea",
                             AccessFailedCount = 0,
                             AccountRoleId = 1,
-                            ConcurrencyStamp = "525a2315-a38f-47ae-869d-e5e804566e69",
+                            ConcurrencyStamp = "885de2d4-f1cf-4241-bc06-9bbfefcae6d1",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -382,10 +384,10 @@ namespace TicketingSystem.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIcEYskHE1xtOF5rXYicUSqet/PSMaVuUXeRgH7apmvVYGowHfCM0hqp4FtCeeW9mQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAAiV7vaTkjGwhLUiyRW/PxJUOoEuST9TAlAaPoGiuqjEse+caPKkvateCEziMBXmA==",
                             PhoneNumberConfirmed = false,
                             SecondName = "Admin",
-                            SecurityStamp = "8d958e5f-ddb5-4fac-9c58-74d5a19c2f08",
+                            SecurityStamp = "966d81ba-493a-4543-9cd3-e89c7bafbac7",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });

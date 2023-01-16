@@ -1,0 +1,15 @@
+﻿@model List<AccountRequestModel>
+
+@{
+    ViewBag.Title = "Account Requests";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="row">
+    @foreach (var account in Model)
+    {
+        <partial name="_AccountPartial" model="@account" />
+    }
+</div>
