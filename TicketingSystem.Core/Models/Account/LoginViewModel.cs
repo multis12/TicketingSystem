@@ -10,8 +10,7 @@ namespace TicketingSystem.Core.Models.Account
     public class LoginViewModel
     {
         [Required]
-        [EmailAddress]
-        public string Email { get; set; } = null!;
+        public string UserName { get; set; } = null!;
 
         [Required]
         [DataType(DataType.Password)]

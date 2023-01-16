@@ -18,6 +18,8 @@ namespace TicketingSystem.Infrastructure.Data
             builder.ApplyConfiguration(new TicketConditionConfiguration());
             builder.ApplyConfiguration(new MessageConditionConfiguration());
             builder.ApplyConfiguration(new RoleConfiguration());
+            builder.ApplyConfiguration(new UserConfiguration());
+            builder.ApplyConfiguration(new UserRoleConfiguration());
 
             base.OnModelCreating(builder);
         }

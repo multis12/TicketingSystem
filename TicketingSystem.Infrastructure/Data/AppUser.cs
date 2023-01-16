@@ -15,5 +15,7 @@ namespace TicketingSystem.Infrastructure.Data
 
         [Required]
         public string SecondName { get; set; }
+
+        public bool IsActive { get; set; } = true;
     }
 }

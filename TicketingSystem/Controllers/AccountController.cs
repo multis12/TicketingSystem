@@ -98,7 +98,7 @@ namespace TicketingSystem.Controllers
                 return View(model);
             }
 
-            var user = await userManager.FindByEmailAsync(model.Email);
+            var user = await userManager.FindByNameAsync(model.UserName);
 
             if (user != null)
             {
