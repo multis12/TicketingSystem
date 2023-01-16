@@ -26,10 +26,13 @@ namespace TicketingSystem.Core.Services
 
         public async Task Create(MessageModel model, IFormFile file, string userId, int ticketId)
         {
-            var filePath = Path.Combine(environment.ContentRootPath, @"wwwroot\messageFiles", file.FileName);
-            using var fileStream = new FileStream(filePath, FileMode.Create);
-            await file.CopyToAsync(fileStream);
-
+            string? filePath = String.Empty;
+            if (file != null)
+            {
+                filePath = Path.Combine(environment.ContentRootPath, @"wwwroot\messageFiles", file.FileName);
+                using var fileStream = new FileStream(filePath, FileMode.Create);
+                await file.CopyToAsync(fileStream);
+            }
             var ticket = await repo.All<Ticket>()
                 .Where(x => x.Id == ticketId)
                 .Include(x => x.Messages)

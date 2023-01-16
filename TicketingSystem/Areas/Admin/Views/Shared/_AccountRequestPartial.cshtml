@@ -12,8 +12,8 @@
             {
                 if (this.User.IsInRole(AdminRoleName))
                 {
-                    <a asp-area="Admin" asp-controller="Account" asp-action="Edit" asp-route-id="@Model.Id"
-               class="btn btn-success">Edit</a>
+                    <a asp-area="Admin" asp-controller="Account" asp-action="Approve" asp-route-id="@Model.Id"
+               class="btn btn-success">Approve</a>
                     <a asp-area="Admin" asp-controller="Account" asp-action="Delete" asp-route-id="@Model.Id"
                class="btn btn-danger">Delete</a>
                 }

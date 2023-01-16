@@ -25,12 +25,12 @@ namespace TicketingSystem.Core.Services
             userManager = _userManager;
         }
 
-        public async Task<IEnumerable<AccountRequestModel>> All()
+        public async Task<IEnumerable<AccountModel>> AllRequests()
         {
-            var result = new List<AccountRequestModel>();
+            var result = new List<AccountModel>();
             result = await repo.All<AppUser>()
                 .Where(x => x.IsActive == false)
-                .Select(x => new AccountRequestModel()
+                .Select(x => new AccountModel()
                 {
                     Id = x.Id,
                     AccountRequestRoleId = x.AccountRoleId,
@@ -44,7 +44,7 @@ namespace TicketingSystem.Core.Services
             return result;
         }
 
-        public async Task Approve(AccountRequestModel model, string userId)
+        public async Task Approve(AccountModel model, string userId)
         {
             var user = await repo.GetByIdAsync<AppUser>(model.Id);
 
@@ -58,17 +58,19 @@ namespace TicketingSystem.Core.Services
                 await userManager.AddToRoleAsync(user, "Staff");
             }
 
+            user.AccountRoleId = model.AccountRequestRoleId;
+
             user.IsActive = true;
             await repo.SaveChangesAsync();
         }
 
-        public async Task<AccountRequestModel> DetailsById(string userId)
+        public async Task<AccountModel> DetailsById(string userId)
         {
-            var result = new AccountRequestModel();
+            var result = new AccountModel();
 
             result = await repo.All<AppUser>()
                 .Where(r => r.Id == userId)
-                .Select(r => new AccountRequestModel()
+                .Select(r => new AccountModel()
                 {
                     AccountRequestRoleId = r.AccountRoleId,
                     Email= r.Email,
@@ -98,6 +100,57 @@ namespace TicketingSystem.Core.Services
         public async Task<int> GetAccountRoleId(string userId)
         {
             return (await repo.GetByIdAsync<AppUser>(userId)).AccountRoleId;
+        }
+
+        public async Task<IEnumerable<AccountModel>> All()
+        {
+            var result = new List<AccountModel>();
+            result = await repo.All<AppUser>()
+                .Where(x => x.IsActive == true)
+                .Select(x => new AccountModel()
+                {
+                    Id = x.Id,
+                    AccountRequestRoleId = x.AccountRoleId,
+                    Email = x.Email,
+                    FirstName = x.FirstName,
+                    SecondName = x.SecondName,
+                    UserName = x.UserName
+                })
+                .ToListAsync();
+
+            return result;
+        }
+
+        public async Task Delete(string userId)
+        {
+            var user = await repo.GetByIdAsync<AppUser>(userId);
+
+            var userTickets = await repo.All<Ticket>()
+                .Where(u => u.UserId == userId)
+                .ToListAsync();
+
+            var userMessages = await repo.All<Message>()
+                .Where(u => u.AuthorId == userId)
+                .ToListAsync();
+
+            foreach (var message in userMessages)
+            {
+                repo.Delete(message);
+            }
+
+            foreach (var ticket in userTickets)
+            {
+                repo.Delete(ticket);
+            }
+
+            repo.Delete(user);
+
+            await repo.SaveChangesAsync();
+        }
+
+        public Task Edit(AccountEditModel model, string userId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

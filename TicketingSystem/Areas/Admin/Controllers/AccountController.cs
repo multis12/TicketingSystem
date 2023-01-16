@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using TicketingSystem.Core.Contracts;
 using TicketingSystem.Core.Models.Account;
 using TicketingSystem.Core.Models.Project;
 using TicketingSystem.Core.Models.Tickets;
 using TicketingSystem.Core.Services;
+using static TicketingSystem.Areas.Admin.Constants.AdminConstants;
 
 namespace TicketingSystem.Areas.Admin.Controllers
 {
@@ -17,27 +19,35 @@ namespace TicketingSystem.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> AllRequests()
         {
-            var model = await accountService.All();
+            if (!User.IsInRole(AdminRoleName))
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
+            var model = await accountService.AllRequests();
 
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> All(IEnumerable<AccountRequestModel> model)
+        public async Task<IActionResult> AllRequests(IEnumerable<AccountModel> model)
         {
-            return RedirectToAction("All", "Account", new { area = "Admin" });
+            return RedirectToAction("AllRequests", "Account", new { area = "Admin" });
         }
 
         [HttpGet]
         public async Task<IActionResult> Approve(string id)
         {
+            if (!User.IsInRole(AdminRoleName))
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
             var user = await accountService.DetailsById(id);
 
             var accountRoleId = await accountService.GetAccountRoleId(id);
 
-            var model = new AccountRequestModel()
+            var model = new AccountModel()
             {
                 Id = id,
                 AccountRequestRoleId = accountRoleId,
@@ -52,7 +62,7 @@ namespace TicketingSystem.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Approve(AccountRequestModel model)
+        public async Task<IActionResult> Approve(AccountModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -63,7 +73,72 @@ namespace TicketingSystem.Areas.Admin.Controllers
 
             await accountService.Approve(model, model.Id);
 
+            return RedirectToAction("AllRequests", "Account", new { area = "Admin" });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> All()
+        {
+            if (!User.IsInRole(AdminRoleName))
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
+            var model = await accountService.All();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> All(IEnumerable<AccountModel> model)
+        {
             return RedirectToAction("All", "Account", new { area = "Admin" });
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (!User.IsInRole(AdminRoleName))
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
+
+            var acc = await accountService.DetailsById(id);
+
+            var model = new AccountDeleteModel()
+            {
+                Email = acc.Email,
+                FirstName = acc.FirstName,
+                SecondName = acc.SecondName,
+                UserName = acc.UserName
+            };
+
+            return View(model);
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id, AccountDeleteModel model)
+        {
+            if (!User.IsInRole(AdminRoleName))
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
+            await accountService.Delete(id);
+
+            return RedirectToAction("All", "Account", new { area = "Admin" });
+        }
+
+        //[HttpGet]
+        //public async Task<IActionResult> Edit(string id)
+        //{
+        //    var acc = await accountService.DetailsById(id);
+            
+        //    acc.AccountRequestRoleId = await accountService.GetAccountRoleId(id);
+
+        //    var model = new AccountEditModel()
+        //    {
+        //        a
+        //    }
+        //}
     }
 }
