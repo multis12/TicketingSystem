@@ -49,8 +49,17 @@ namespace TicketingSystem.Core.Services
 
         public async Task Delete(int projectId)
         {
-            var project = await repo.GetByIdAsync<Project>(projectId);
+            var project = await repo.All<Project>()
+                .Where(p => p.Id == projectId)
+                .Include(p => p.Tickets)
+                .FirstAsync();
+
             project.IsActive = false;
+
+            foreach (var ticket in project.Tickets)
+            {
+                ticket.IsActive = false;
+            }
 
             await repo.SaveChangesAsync();
         }

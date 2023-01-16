@@ -148,5 +148,28 @@ namespace TicketingSystem.Core.Services
         {
             return (await repo.GetByIdAsync<Ticket>(ticketId)).TypeId;
         }
+
+        public async Task<IEnumerable<TicketServiceModel>> Mine(string userId)
+        {
+            return await repo.AllReadonly<Ticket>()
+                .Where(t => t.UserId == userId)
+                .Where(t => t.IsActive == true)
+                .Select(t => new TicketServiceModel()
+                {
+                    DateAndTime = t.DateAndTime,
+                    Condition = t.Condition.Name,
+                    Title = t.Title,
+                    Description = t.Description,
+                    FilePath = t.FilePath,
+                    Type = t.Type.Name,
+                    Email = t.User.Email,
+                    FirstName = t.User.FirstName,
+                    Id = t.Id,
+                    Messages = t.Messages,
+                    SecondName = t.User.SecondName
+
+                })
+                .ToListAsync();
+        }
     }
 }

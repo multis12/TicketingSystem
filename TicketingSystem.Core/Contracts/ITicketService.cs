@@ -26,5 +26,7 @@ namespace TicketingSystem.Core.Contracts
         Task<int> GetTicketConditionId(int ticketId);
 
         Task<int> GetTicketTypeId(int ticketId);
+
+        Task<IEnumerable<TicketServiceModel>> Mine(string userId);
     }
 }
