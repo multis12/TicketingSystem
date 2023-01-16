@@ -1,0 +1,52 @@
+﻿@model AccountEditModel
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form enctype="multipart/form-data" method="post">
+            <input type="hidden" asp-for="@Model.Id" />
+            <div class="form-group">
+                <label asp-for="UserName"></label>
+                <input asp-for="UserName" class="form-control" placeholder="UserName...">
+                <span asp-validation-for="UserName" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" placeholder="Email...">
+                <span asp-validation-for="Email" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control" placeholder="Password...">
+                <span asp-validation-for="Password" class="small text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="NewPassword"></label>
+                <input asp-for="NewPassword" class="form-control" placeholder="New Password...">
+                <span asp-validation-for="NewPassword" class="small text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" class="form-control" placeholder="First Name...">
+                <span asp-validation-for="FirstName" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SecondName"></label>
+                <input asp-for="SecondName" class="form-control" placeholder="Second Name...">
+                <span asp-validation-for="SecondName" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AccountRequestRoleId"></label>
+                <select asp-for="AccountRequestRoleId" class="form-control">
+                    @foreach (var accRoleId in Model.AccountRequestRoles)
+                    {
+                        <option value="@accRoleId.Id">@accRoleId.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="AccountRequestRoleId" class="small text-danger"></span>
+            </div>        
+            <div class="text-center">
+                <input class="btn btn-primary mt-3" type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+</div>

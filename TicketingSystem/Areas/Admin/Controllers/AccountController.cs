@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using TicketingSystem.Core.Contracts;
 using TicketingSystem.Core.Models.Account;
 using TicketingSystem.Core.Models.Project;
 using TicketingSystem.Core.Models.Tickets;
 using TicketingSystem.Core.Services;
+using TicketingSystem.Infrastructure.Data;
 using static TicketingSystem.Areas.Admin.Constants.AdminConstants;
 
 namespace TicketingSystem.Areas.Admin.Controllers
@@ -12,10 +15,12 @@ namespace TicketingSystem.Areas.Admin.Controllers
     public class AccountController : BaseController
     {
         private readonly IAccountService accountService;
+        private readonly UserManager<AppUser> userManager;
 
-        public AccountController(IAccountService _accountService)
+        public AccountController(IAccountService _accountService, UserManager<AppUser> _userManager)
         {
             accountService = _accountService;
+            userManager = _userManager;
         }
 
         [HttpGet]
@@ -128,17 +133,93 @@ namespace TicketingSystem.Areas.Admin.Controllers
             return RedirectToAction("All", "Account", new { area = "Admin" });
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> Edit(string id)
-        //{
-        //    var acc = await accountService.DetailsById(id);
-            
-        //    acc.AccountRequestRoleId = await accountService.GetAccountRoleId(id);
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
+        {
+            if (!User.IsInRole(AdminRoleName))
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
+            var acc = await accountService.DetailsById(id);
 
-        //    var model = new AccountEditModel()
-        //    {
-        //        a
-        //    }
-        //}
+            var accountRequestRoleId = await accountService.GetAccountRoleId(id);
+
+            var model = new AccountEditModel()
+            {
+                Id = acc.Id,
+                FirstName = acc.FirstName,
+                SecondName = acc.SecondName,
+                UserName = acc.UserName,
+                Email = acc.Email,
+                AccountRequestRoleId = accountRequestRoleId,
+                AccountRequestRoles = await accountService.GetAllAccountRoles()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(AccountEditModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                model.AccountRequestRoles = await accountService.GetAllAccountRoles();
+
+                return View(model);
+            }
+
+            await accountService.Edit(model, model.Id);
+
+            return RedirectToAction(nameof(All));
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Register()
+        {
+            if (!User.IsInRole(AdminRoleName))
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
+
+            var model = new RegisterViewModel();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> Register(RegisterViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = new AppUser()
+            {
+                FirstName = model.FirstName,
+                SecondName = model.SecondName,
+                Email = model.Email,
+                UserName = model.UserName
+            };
+            user.AccountRoleId = 2;
+
+            var result = await userManager.CreateAsync(user, model.Password);
+
+            if (result.Succeeded)
+            {
+                await userManager.AddToRoleAsync(user, "Client");
+
+                return RedirectToAction(nameof(AllRequests));
+            }
+
+            foreach (var item in result.Errors)
+            {
+                ModelState.AddModelError("", item.Description);
+            }
+
+            return View(model);
+        }
     }
 }

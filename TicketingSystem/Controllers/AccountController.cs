@@ -96,13 +96,13 @@ namespace TicketingSystem.Controllers
             }
 
             var user = await userManager.FindByNameAsync(model.UserName);
-
-            if (user.IsActive == false)
-            {
-                throw new ArgumentException("Account is not approved or it's Banned");
-            }
+    
             if (user != null)
             {
+                if (user.IsActive == false)
+                {
+                    throw new ArgumentException("Account is not approved or it's Banned");
+                }
                 var result = await signInManager.PasswordSignInAsync(user, model.Password, false, false);
                 if (result.Succeeded)
                 {

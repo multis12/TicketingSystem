@@ -148,9 +148,64 @@ namespace TicketingSystem.Core.Services
             await repo.SaveChangesAsync();
         }
 
-        public Task Edit(AccountEditModel model, string userId)
+        public async Task Edit(AccountEditModel model, string userId)
         {
-            throw new NotImplementedException();
+            var hasher = new PasswordHasher<AppUser>();
+            var user = await repo.GetByIdAsync<AppUser>(userId);
+
+            user.FirstName = model.FirstName;
+            //if (model.CurrentPassword != null && model.NewPassword != null)
+            //{
+            //    await userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
+            //}
+            if (model.Password != null)
+            {
+                await userManager.RemovePasswordAsync(user);
+                await userManager.AddPasswordAsync(user, model.Password);
+            }
+            user.Email = model.Email;
+            user.PasswordHash = hasher.HashPassword(user, model.Password);
+            user.NormalizedEmail = model.Email.ToUpper();
+            user.SecondName = model.SecondName;
+            user.UserName = model.UserName;
+            user.NormalizedUserName = model.UserName.ToUpper();
+            user.AccountRoleId = model.AccountRequestRoleId;
+
+            if (user.AccountRoleId == 1 && !(await userManager.IsInRoleAsync(user, "Administrator")))
+            {
+                await userManager.AddToRoleAsync(user, "Administrator");
+
+                if (!(await userManager.IsInRoleAsync(user, "Staff")))
+                {
+                    await userManager.AddToRoleAsync(user, "Staff");
+                }
+            }
+
+            else if (user.AccountRoleId == 2 && (await userManager.IsInRoleAsync(user, "Staff")))
+            {
+                await userManager.RemoveFromRoleAsync(user, "Staff");
+
+                if (await userManager.IsInRoleAsync(user, "Administrator"))
+                {
+                    await userManager.RemoveFromRoleAsync(user, "Administrator");
+                }
+            }
+
+            else if (user.AccountRoleId == 3 && !(await userManager.IsInRoleAsync(user, "Staff")))
+            {
+                await userManager.AddToRoleAsync(user, "Staff");
+
+            }
+
+            else if (user.AccountRoleId == 3 && (await userManager.IsInRoleAsync(user, "Staff")))
+            {
+                if (await userManager.IsInRoleAsync(user, "Administrator"))
+                {
+                    await userManager.RemoveFromRoleAsync(user, "Administrator");
+                }
+            }
+
+            await repo.SaveChangesAsync();
         }
     }
 }
