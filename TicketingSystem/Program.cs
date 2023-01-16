@@ -19,6 +19,7 @@ builder.Services.AddDefaultIdentity<AppUser>(options =>
     options.SignIn.RequireConfirmedPhoneNumber = builder.Configuration.GetValue<bool>("Account:RequireConfirmedPhoneNumber");
     options.Password.RequiredLength = builder.Configuration.GetValue<int>("Account:RequiredLength");
     options.Password.RequireNonAlphanumeric = builder.Configuration.GetValue<bool>("Account:RequireNonAlphanumeric");
+    options.Password.RequireDigit = builder.Configuration.GetValue<bool>("Account:RequireDigit");
 })
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();

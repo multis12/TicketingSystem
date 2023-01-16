@@ -1,0 +1,14 @@
+﻿@model AccountEditModel
+
+@{
+    ViewBag.Title = "Edit Account";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<partial name="_AccountEditPartial" model="@Model" />
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
