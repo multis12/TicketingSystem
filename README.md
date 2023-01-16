@@ -1,6 +1,6 @@
 # TicketingSystem
 
-Ticketing system on projects. The tickets have messages to chat through with the staff.
+Ticketing system on projects. The tickets have messages to chat with the staff.
 
 Simon Slavov email: allidor12@gmail.com
 
