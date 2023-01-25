@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
 using static TicketingSystem.Areas.Admin.Constants.AdminConstants;
 
 namespace TicketingSystem.Areas.Admin.Controllers

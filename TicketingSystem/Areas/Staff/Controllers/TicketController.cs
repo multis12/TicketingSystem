@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-using TicketingSystem.Areas.Client.Controllers;
 using TicketingSystem.Core.Contracts;
 using TicketingSystem.Core.Models.Tickets;
 
@@ -17,8 +15,8 @@ namespace TicketingSystem.Areas.Staff.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await ticketService.Delete(id);
-            
-            return RedirectToAction("All", "Project", new { area = "Client"});
+
+            return RedirectToAction("All", "Project", new { area = "Client" });
         }
 
         [HttpGet]
@@ -52,7 +50,7 @@ namespace TicketingSystem.Areas.Staff.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Edit(TicketEditModel model)
-             {
+        {
             if (!ModelState.IsValid)
             {
                 model.Conditions = await ticketService.AllTicketConditions();
@@ -63,7 +61,7 @@ namespace TicketingSystem.Areas.Staff.Controllers
 
             await ticketService.Edit(model, model.Id);
 
-            return RedirectToAction("All", "Project", new { area = "Client"});
+            return RedirectToAction("All", "Project", new { area = "Client" });
         }
     }
 }

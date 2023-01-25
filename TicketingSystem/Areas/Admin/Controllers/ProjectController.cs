@@ -13,7 +13,7 @@ namespace TicketingSystem.Areas.Admin.Controllers
         public ProjectController(IProjectService _projectService)
         {
             projectService = _projectService;
-        }       
+        }
 
         [HttpGet]
         public async Task<IActionResult> Add()
@@ -58,7 +58,7 @@ namespace TicketingSystem.Areas.Admin.Controllers
 
             var model = new ProjectDeleteModel()
             {
-                Name = project.Name        
+                Name = project.Name
             };
 
             return View(model);

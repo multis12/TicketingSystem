@@ -12,10 +12,6 @@
             <h4>First Name: @Model.FirstName</h4>
             <h4>Second Name: @Model.SecondName</h4>
             <h4>Email: @Model.Email</h4>
-            @*@foreach (var ticket in Model.Tickets)
-            {
-            <partial name="_TicketPartial" model="@ticket" />
-            }*@
             <br />
             @if (User.Identity.IsAuthenticated)
             {

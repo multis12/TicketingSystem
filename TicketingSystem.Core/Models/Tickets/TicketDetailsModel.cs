@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TicketingSystem.Core.Models.Messages;
-using TicketingSystem.Infrastructure.Data;
+﻿using TicketingSystem.Core.Models.Messages;
 
 namespace TicketingSystem.Core.Models.Tickets
 {

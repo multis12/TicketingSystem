@@ -59,7 +59,7 @@ namespace TicketingSystem.Core.Services
                 using var fileStream = new FileStream(filePath, FileMode.Create);
                 await file.CopyToAsync(fileStream);
             }
-            
+
             var project = await repo.All<Project>()
                 .Where(x => x.Id == projectId)
                 .Include(x => x.Tickets)
@@ -82,7 +82,7 @@ namespace TicketingSystem.Core.Services
             };
 
             project.Tickets.Add(ticket);
-            
+
             await repo.AddAsync(ticket);
             await repo.SaveChangesAsync();
         }
@@ -106,7 +106,7 @@ namespace TicketingSystem.Core.Services
                         Id = x.Id,
                         Title = x.Title,
                         Description = x.Description,
-                        DateAndTime= x.DateAndTime,
+                        DateAndTime = x.DateAndTime,
                         Condition = x.Condition.Name,
                         Email = x.User.Email,
                         FilePath = x.FilePath,

@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TicketingSystem.Infrastructure.Data.Configuration
 {
@@ -18,7 +13,7 @@ namespace TicketingSystem.Infrastructure.Data.Configuration
         private List<AccountRequestRole> CreateAccountRequestRoles()
         {
             var accountRequestRoles = new List<AccountRequestRole>()
-            { 
+            {
                 new AccountRequestRole()
                 {
                     Id = 1,

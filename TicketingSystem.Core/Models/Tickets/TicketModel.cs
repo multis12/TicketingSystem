@@ -15,7 +15,7 @@ namespace TicketingSystem.Core.Models.Tickets
         [Required]
         [StringLength(2000)]
         public string Description { get; set; }
-            
+
         public IFormFile? FilePath { get; set; }
 
         public DateTime? DateAndTime { get; set; } = DateTime.Now;

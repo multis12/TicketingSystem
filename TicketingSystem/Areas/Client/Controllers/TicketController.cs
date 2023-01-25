@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using TicketingSystem.Core.Contracts;
-using TicketingSystem.Core.Models.Project;
 using TicketingSystem.Core.Models.Tickets;
-using TicketingSystem.Core.Services;
 
 namespace TicketingSystem.Areas.Client.Controllers
 {
@@ -25,7 +23,7 @@ namespace TicketingSystem.Areas.Client.Controllers
                 Conditions = await ticketService.AllTicketConditions(),
                 Types = await ticketService.AllTicketTypes(),
             };
-            
+
             return View(model);
         }
 
@@ -45,7 +43,7 @@ namespace TicketingSystem.Areas.Client.Controllers
             await ticketService.Create(model, model.FilePath, userId, projectId);
 
             return RedirectToAction("All", "Project");
-        
+
         }
 
         public async Task<IActionResult> Details(int id)

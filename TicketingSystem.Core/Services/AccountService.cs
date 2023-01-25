@@ -1,14 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TicketingSystem.Core.Contracts;
 using TicketingSystem.Core.Models.Account;
-using TicketingSystem.Core.Models.Messages;
-using TicketingSystem.Core.Models.Project;
 using TicketingSystem.Infrastructure.Data;
 using TicketingSystem.Infrastructure.Data.Common;
 
@@ -48,12 +41,12 @@ namespace TicketingSystem.Core.Services
         {
             var user = await repo.GetByIdAsync<AppUser>(model.Id);
 
-            if (model.AccountRequestRoleId == 1 )
+            if (model.AccountRequestRoleId == 1)
             {
                 await userManager.AddToRoleAsync(user, "Administrator");
                 await userManager.AddToRoleAsync(user, "Staff");
             }
-            else if (model.AccountRequestRoleId == 3 )
+            else if (model.AccountRequestRoleId == 3)
             {
                 await userManager.AddToRoleAsync(user, "Staff");
             }
@@ -73,9 +66,9 @@ namespace TicketingSystem.Core.Services
                 .Select(r => new AccountModel()
                 {
                     AccountRequestRoleId = r.AccountRoleId,
-                    Email= r.Email,
-                    FirstName= r.FirstName,
-                    Id= r.Id,
+                    Email = r.Email,
+                    FirstName = r.FirstName,
+                    Id = r.Id,
                     SecondName = r.SecondName,
                     UserName = r.UserName
                 })
@@ -154,10 +147,7 @@ namespace TicketingSystem.Core.Services
             var user = await repo.GetByIdAsync<AppUser>(userId);
 
             user.FirstName = model.FirstName;
-            //if (model.CurrentPassword != null && model.NewPassword != null)
-            //{
-            //    await userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
-            //}
+
             if (model.Password != null)
             {
                 await userManager.RemovePasswordAsync(user);

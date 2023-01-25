@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TicketingSystem.Infrastructure.Migrations;
 using static TicketingSystem.Areas.Client.Constants.ClientConstants;
 
 namespace TicketingSystem.Areas.Client.Controllers
