@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TicketingSystem.Infrastructure.Data;
-
-namespace TicketingSystem.Core.Models.Messages
+﻿namespace TicketingSystem.Core.Models.Messages
 {
     public class MessageServiceModel
     {

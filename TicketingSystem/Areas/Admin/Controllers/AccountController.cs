@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 using TicketingSystem.Core.Contracts;
 using TicketingSystem.Core.Models.Account;
-using TicketingSystem.Core.Models.Project;
-using TicketingSystem.Core.Models.Tickets;
-using TicketingSystem.Core.Services;
 using TicketingSystem.Infrastructure.Data;
 using static TicketingSystem.Areas.Admin.Constants.AdminConstants;
 

@@ -34,10 +34,10 @@
                    asp-route-id="@Model.Id">Send a Message</a>
                 }
             </div>
-                @foreach (var ticket in Model.Messages)
-                {
-                    <partial name="_MessagePartial" model="@ticket" />
-                }
+            @foreach (var ticket in Model.Messages)
+            {
+                <partial name="_MessagePartial" model="@ticket" />
+            }
             <p></p>
         </div>
     </div>

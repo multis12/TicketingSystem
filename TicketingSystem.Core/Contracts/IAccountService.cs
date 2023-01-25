@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TicketingSystem.Core.Models.Account;
-using TicketingSystem.Core.Models.Project;
-using TicketingSystem.Core.Models.Tickets;
+﻿using TicketingSystem.Core.Models.Account;
 
 namespace TicketingSystem.Core.Contracts
 {
@@ -21,7 +14,7 @@ namespace TicketingSystem.Core.Contracts
 
         Task Edit(AccountEditModel model, string userId);
 
-        Task Approve(AccountModel model,string userId);
+        Task Approve(AccountModel model, string userId);
 
         Task<int> GetAccountRoleId(string userId);
 

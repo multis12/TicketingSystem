@@ -68,53 +68,6 @@ namespace TicketingSystem.Core.Services
         {
             var user = await repo.GetByIdAsync<AppUser>(userId);
 
-            //var project = await repo.GetByIdAsync<Project>(Id);
-            
-            //var testProjectTickets = new List<TicketServiceModel>();
-
-            //var projectTickets = await repo.All<Project>()
-            //    .Where(p => p.Id == Id)
-            //    .Include(p => p.Tickets.Select(t => new TicketServiceModel()
-            //    {
-            //        Id = t.Id,
-            //        DateAndTime = t.DateAndTime,
-            //        Condition = t.Condition.Name,
-            //        Description = t.Description,
-            //        Email = t.User.Email,
-            //        FilePath = t.FilePath,
-            //        FirstName = t.User.FirstName,
-            //        Messages = t.Messages,
-            //        SecondName = t.User.SecondName,
-            //        Title = t.Title,
-            //        Type = t.Type.Name
-            //    }).ToList())
-            //    .FirstAsync();
-
-            
-            //testProjectTickets = projectTickets.Tickets;
-
-                //testProjectTickets = await repo.All<Ticket>()
-                //.Select(a => new TicketServiceModel()
-                //{
-                //    DateAndTime = a.DateAndTime,
-                //    Condition = a.Condition.Name,
-                //    Description = a.Description,
-                //    SecondName = a.User.SecondName,
-                //    Email = a.User.Email,
-                //    FilePath = a.FilePath,
-                //    FirstName = a.User.FirstName,
-                //    Id = a.Id,
-                //    Messages = a.Messages,
-                //    Title = a.Title,
-                //    Type = a.Type.Name
-                //})
-                //.ToListAsync();
-
-
-            //var allProjectTickets = new List<TicketServiceModel>();
-
-            //allProjectTickets = projectTickets.Tickets;
-
             var clientTickets = new List<TicketServiceModel>();
 
             clientTickets = await repo.AllReadonly<Ticket>()
@@ -177,7 +130,7 @@ namespace TicketingSystem.Core.Services
                         }).ToList()
                     }).FirstAsync();
             }
-            
+
         }
     }
 }

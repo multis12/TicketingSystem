@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using TicketingSystem.Core.Models.Account;
 using TicketingSystem.Infrastructure.Data;
 
@@ -50,7 +49,7 @@ namespace TicketingSystem.Controllers
                 SecondName = model.SecondName,
                 Email = model.Email,
                 UserName = model.UserName
-                
+
             };
 
             user.AccountRoleId = 2;
@@ -61,7 +60,7 @@ namespace TicketingSystem.Controllers
 
             if (result.Succeeded)
             {
-               
+
                 return RedirectToAction("Login", "Account", new { area = "" });
             }
 
@@ -96,7 +95,7 @@ namespace TicketingSystem.Controllers
             }
 
             var user = await userManager.FindByNameAsync(model.UserName);
-    
+
             if (user != null)
             {
                 if (user.IsActive == false)
@@ -110,11 +109,11 @@ namespace TicketingSystem.Controllers
                     {
                         return RedirectToAction("Index", "Home", new { area = "Admin" });
                     }
-                    else if (await userManager.IsInRoleAsync(user,"Staff"))
+                    else if (await userManager.IsInRoleAsync(user, "Staff"))
                     {
                         return RedirectToAction("Index", "Home", new { area = "Staff" });
                     }
-                    else if (await userManager.IsInRoleAsync(user,"Client"))
+                    else if (await userManager.IsInRoleAsync(user, "Client"))
                     {
                         return RedirectToAction("Index", "Home", new { area = "Client" });
                     }

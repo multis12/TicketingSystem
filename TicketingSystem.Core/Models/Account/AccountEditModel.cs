@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TicketingSystem.Infrastructure.Data;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace TicketingSystem.Core.Models.Account
 {
@@ -29,9 +23,6 @@ namespace TicketingSystem.Core.Models.Account
 
         [DataType(DataType.Password)]
         public string? Password { get; set; }
-
-        //[DataType(DataType.Password)]
-        //public string? NewPassword { get; set; }
 
         public IEnumerable<AccountRequestRoleModel> AccountRequestRoles { get; set; } = new List<AccountRequestRoleModel>();
     }

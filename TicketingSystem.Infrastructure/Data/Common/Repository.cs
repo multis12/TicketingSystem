@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Linq.Expressions;
-using TicketingSystem.Infrastructure.Data;
 
 namespace TicketingSystem.Infrastructure.Data.Common
 {

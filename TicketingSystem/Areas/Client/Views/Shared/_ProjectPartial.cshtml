@@ -5,10 +5,6 @@
         <div class="card-body text-center">
             <h4>Title:@Model.Name</h4>
             <h4>Description:@Model.Description</h4>
-            @*@foreach (var ticket in Model.Tickets)
-            {
-                <partial name="_TicketPartial" model="@ticket" />
-            }*@
             <br />
             @if (this.User.Identity.IsAuthenticated)
             {
@@ -17,8 +13,8 @@
                     <a asp-area="Admin" asp-controller="Project" asp-action="Delete" asp-route-id="@Model.Id"
                class="btn btn-danger">Delete</a>
                 }
-                    <a asp-area="Client" asp-controller="Project" asp-action="Details" asp-route-id="@Model.Id"
-               class="btn btn-success">Details</a>  
+                <a asp-area="Client" asp-controller="Project" asp-action="Details" asp-route-id="@Model.Id"
+               class="btn btn-success">Details</a>
                 if (User.IsInRole(AdminRoleName) || User.IsInRole(StaffRoleName) || User.IsInRole(ClientRoleName))
                 {
                     <a asp-area="Client" asp-controller="Ticket" asp-action="Create" asp-route-projectId="@Model.Id"

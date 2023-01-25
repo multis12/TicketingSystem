@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TicketingSystem.Core.Models.Tickets;
-using TicketingSystem.Infrastructure.Data;
+﻿using TicketingSystem.Core.Models.Tickets;
 
 namespace TicketingSystem.Core.Models.Project
 {
